@@ -1,22 +1,24 @@
-import sqlite3, { Database } from 'sqlite3';
-import fs from 'fs';
+import { Database } from 'sqlite3'
 
-const DBSOURCE = 'db.sqlite';
+const fs = require('fs');
+const sqlite3 = require('sqlite3');
 
-const db : Database = new sqlite3.Database(DBSOURCE, (err) => {
+const DBSOURCE = './database/db.sqlite';
+
+const db : Database = new sqlite3.Database(DBSOURCE, (err : Error) => {
     if (err) {
         console.error(err.message);
         throw err;
     } else {
         console.log('Connected to the SQLite database.');
-        // Read SQL statement from userTable.sql file
+        // Read SQL statement to create tables
         const sql = fs.readFileSync('./resources/database.sql', 'utf-8');
         // Execute the SQL statement
         db.exec(sql, (err) => {
             if (err) {
                 console.error('Error executing SQL statement:', err);
             } else {
-                console.log('User table created successfully.');
+                console.log('Tables created successfully.');
             }
         });
     }
