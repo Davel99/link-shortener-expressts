@@ -7,6 +7,8 @@ require('dotenv').config();
 // Create an Express application instance
 const app: Application = express();
 const PORT = process.env.PORT || 5500;
+const KEY = process.env.XAPIKEY;
+const SECRET = process.env.XAPISECRET;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
