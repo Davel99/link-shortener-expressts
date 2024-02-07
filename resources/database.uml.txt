@@ -1,0 +1,24 @@
+@startuml
+!pragma table_links_salt 0
+
+entity "Links" {
+  + id INTEGER <<PK>>
+  full_url TEXT
+  short_url TEXT
+  created_at TEXT
+}
+
+entity "Statistics" {
+  + id INTEGER <<PK>>
+  link_id INTEGER <<FK>>
+  user_agent TEXT
+  geolocation TEXT
+  ip_address TEXT
+  device_type TEXT
+  os TEXT
+  browser TEXT
+  timestamp TEXT
+}
+
+Links ||--o{ Statistics
+@enduml
