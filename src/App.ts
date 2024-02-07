@@ -1,17 +1,25 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+import { Application, Request, Response, NextFunction } from 'express';
 import db from '../database/dbCreation';
+
+const express = require('express');
 
 // Create an Express application instance
 const app: Application = express();
 const port : number = 3000;
 
-
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Sample route
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
-    res.send('Hello, world!');
+app.get('/', (req: Request, res: Response, next: NextFunction) => {    
+
+    db.all('SELECT * FROM Links', (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
 });
 
 // Error handling middleware
