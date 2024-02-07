@@ -1,11 +1,11 @@
-CREATE TABLE Links (
+CREATE TABLE IF NOT EXISTS Links (
     id INTEGER PRIMARY KEY,
     full_url TEXT,
     short_url TEXT,
     created_at TEXT
 );
 
-CREATE TABLE Statistics (
+CREATE TABLE IF NOT EXISTS Statistics (
     id INTEGER PRIMARY KEY,
     link_id INTEGER,
     user_agent TEXT,
