@@ -4,13 +4,14 @@
   "description": "",
   "main": "App.js",
   "scripts": {
-    "start" : "npx tsc ./src/App.ts && node ./src/App.js",
+    "start": "npx tsc ./src/App.ts && node ./src/App.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "sqlite3": "^5.1.7"
   },

@@ -2,10 +2,11 @@ import { Application, Request, Response, NextFunction } from 'express';
 import db from '../database/dbCreation';
 
 const express = require('express');
+require('dotenv').config();
 
 // Create an Express application instance
 const app: Application = express();
-const port : number = 3000;
+const PORT = process.env.PORT || 5500;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -28,6 +29,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     res.status(500).send('Something broke!');
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`)
 });
