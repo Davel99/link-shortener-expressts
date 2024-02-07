@@ -1,0 +1,219 @@
+openapi: 3.0.0
+info:
+  title: Link Management API
+  description: API for managing links and accessing statistics
+  version: 1.0.0
+
+paths:
+  /api/link:
+    post:
+      summary: Create link
+      description: Create a new link with full_url and short_url
+      security:
+        - apiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                full_url:
+                  type: string
+                short_url:
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/link/{short_url}:
+    delete:
+      summary: Delete link
+      description: Delete a link by its short_url
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: short_url
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/statistics/{short_url}:
+    get:
+      summary: Get statistics
+      description: Get statistics for a given short URL
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: short_url
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Statistic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/statistics/{short_url}/count:
+    get:
+      summary: Get statistics count
+      description: Get the count of statistics for a given short URL
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: short_url
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: integer
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/statistics:
+    get:
+      summary: Get all statistics
+      description: Get all statistics
+      security:
+        - apiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Statistic'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/statistics/count:
+    get:
+      summary: Get all statistics count
+      description: Get the count of all statistics grouped by link
+      security:
+        - apiKey: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    short_url:
+                      type: string
+                    count:
+                      type: integer
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+components:
+  securitySchemes:
+      apiKey:
+        type: apiKey
+        in: header
+        name: X-API-KEY
+      appId:
+        type: apiKey
+        in: header
+        name: X-API-SECRET
+  schemas:
+    Statistic:
+      type: object
+      properties:
+        user_agent:
+          type: string
+        geolocation:
+          type: string
+        ip_address:
+          type: string
+        device_type:
+          type: string
+        os:
+          type: string
+        browser:
+          type: string
+        timestamp:
+          type: string
