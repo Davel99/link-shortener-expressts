@@ -1,8 +1,10 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
+import db from '../database/dbCreation';
 
 // Create an Express application instance
 const app: Application = express();
 const port : number = 3000;
+
 
 // Middleware to parse JSON bodies
 app.use(express.json());
