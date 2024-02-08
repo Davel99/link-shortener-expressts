@@ -1,6 +1,6 @@
 import { Application, Request, Response, NextFunction } from 'express';
 import db from '../database/dbCreation';
-import LinksRouter from './routes/linksRoutes';
+import linksRouter from './routes/linkRouter';
 
 const express = require('express');
 require('dotenv').config();
@@ -27,7 +27,7 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
     });
 });
 
-app.use(LinksRouter);
+app.use(linksRouter);
 
 // Error handling middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
