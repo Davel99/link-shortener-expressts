@@ -1,5 +1,6 @@
 import { Application, Request, Response, NextFunction } from 'express';
 import db from '../database/dbCreation';
+import LinksRouter from './routes/linksRoutes';
 
 const express = require('express');
 require('dotenv').config();
@@ -13,6 +14,7 @@ const SECRET = process.env.XAPISECRET;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+
 // Sample route
 app.get('/', (req: Request, res: Response, next: NextFunction) => {    
 
@@ -24,6 +26,8 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
         res.json(rows);
     });
 });
+
+app.use(LinksRouter);
 
 // Error handling middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
