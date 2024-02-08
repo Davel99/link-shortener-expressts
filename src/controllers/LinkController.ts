@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import LinksService from '../services/LinkService';
 
-class LinksController{
+class LinkController{
     private linkService : LinksService;
 
     constructor(service : LinksService){
@@ -20,4 +20,4 @@ class LinksController{
 
 }
 
-export default LinksController;
+export default LinkController;
