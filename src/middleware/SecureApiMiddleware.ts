@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { apiKey, apiSecret } from '../utility/envValues';
 
-export const apiKeyAuthMiddleware = (
+export const SecureAPIMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
