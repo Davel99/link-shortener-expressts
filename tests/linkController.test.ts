@@ -54,7 +54,6 @@ describe('LinkController', () => {
   it('Should return false when full_url is missing', async () => {
     const mockRequest: Request = {
         body: {
-          full_url: '',
           short_url: 'goo'
         }
       } as unknown as Request;
