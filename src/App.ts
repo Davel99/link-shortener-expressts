@@ -12,9 +12,8 @@ const PORT = process.env.PORT || 5500;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-
 // Sample route
-app.get('/', (req: Request, res: Response, next: NextFunction) => {    
+app.get('/', (req: Request, res: Response) => {    
 
     db.all('SELECT * FROM Links', (err, rows) => {
         if (err) {
@@ -28,10 +27,10 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 app.use(linksRouter);
 
 // Error handling middleware
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
+// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+//     console.error(err.stack);
+//     res.status(500).send('Something broke!');
+// });
 
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`)

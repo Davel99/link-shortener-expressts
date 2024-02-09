@@ -1,16 +1,14 @@
 import { Response, Request } from 'express';
 import LinkController from '../controllers/LinkController';
-import LinkService from '../services/LinkService';
-import { SecureAPIMiddleware } from '../middleware/SecureApiMiddleware';
+import { SecureAPIMiddleware } from '../middleware/SecureAPIMiddleware';
 
 const express = require('express');
 const linksRouter = express.Router();
-const linkService : LinkService = new LinkService();
+const linkService = 1;
 
 const linkController = new LinkController(linkService);
 
 linksRouter.use(SecureAPIMiddleware);
-
 linksRouter.post('/api/links', linkController.postUser);
 
 
