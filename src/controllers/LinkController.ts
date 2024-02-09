@@ -1,11 +1,11 @@
 import { Response, Request } from 'express';
-import LinksService from '../services/LinkService';
+import linkService from '../services/LinkService';
 
 class LinkController {
-    private linkService: LinksService;
+    private linkServicex;
 
-    constructor(service: LinksService) {
-        this.linkService = service;
+    constructor(service: any ) {
+        this.linkServicex = service;
     }
 
     async postUser(req: Request, res: Response): Promise<void> {
@@ -18,7 +18,7 @@ class LinkController {
         ) {
             full_url = full_url.trim();
             short_url = short_url.trim();
-            response = await this.linkService.postUser(full_url, short_url);
+            response = await linkService.postUser(full_url, short_url);
             res.status(200).json({ response });
         }
         else res.status(400).json({ response });

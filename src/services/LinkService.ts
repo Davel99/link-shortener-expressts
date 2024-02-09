@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import db from '../../database/dbCreation';
 
-export default class LinkService {
+class LinkService {
 
     async postUser(full_url: String, short_url: String): Promise<Boolean> {
         let response: Boolean = false;
@@ -28,3 +28,6 @@ export default class LinkService {
     };
 
 }
+
+const linkService = new LinkService();
+export default linkService;
