@@ -26,4 +26,28 @@ describe('LinkController', () => {
     expect(mockResponse.status).toHaveBeenCalledWith(200);
     expect(mockResponse.json).toHaveBeenCalledWith({response});
   });
+
+  it('Should return false when no short_url is provided', async () => {
+    const mockRequest: Request = {
+        body: {
+          full_url: 'https://www.google.com/',
+          short_url: ''
+        }
+      } as unknown as Request;
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as unknown as Response;
+
+    const linkService = new LinkService();
+    linkService.postUser = jest.fn().mockResolvedValue(true);
+
+    const linkController = new LinkController(linkService);
+    await linkController.postUser(mockRequest, mockResponse);
+
+    const response : Boolean = false;
+
+    expect(mockResponse.status).toHaveBeenCalledWith(400);
+    expect(mockResponse.json).toHaveBeenCalledWith({response});
+  });
 });
