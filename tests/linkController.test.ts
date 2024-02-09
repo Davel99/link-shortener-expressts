@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import LinkController from '../src/controllers/LinkController';
-import LinkService from '../src/services/LinkService';
+import linkService from '../src/services/LinkService';
 
 describe('LinkController', () => {
   it('Should return true when valid data is provided', async () => {
@@ -15,7 +15,6 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    const linkService = new LinkService();
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController(linkService);
@@ -39,7 +38,6 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    const linkService = new LinkService();
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController(linkService);
@@ -62,7 +60,6 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    const linkService = new LinkService();
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController(linkService);
@@ -86,7 +83,6 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    const linkService = new LinkService();
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController(linkService);
@@ -110,7 +106,6 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    const linkService = new LinkService();
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController(linkService);
