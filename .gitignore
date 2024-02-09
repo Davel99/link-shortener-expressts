@@ -92,7 +92,12 @@ out
 dist
 
 # JS files
-.js
+# Ignore JavaScript files inside src/ directory
+src/**/*.js
+
+# Ignore JavaScript files inside database/ directory
+database/**/*.js
+
 
 # Gatsby files
 .cache/
