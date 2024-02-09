@@ -3,7 +3,7 @@ import LinkController from '../src/controllers/LinkController';
 import LinkService from '../src/services/LinkService';
 
 describe('LinkController', () => {
-  it('should return true when valid data is provided', async () => {
+  it('Should return true when valid data is provided', async () => {
     const mockRequest: Request = {
         body: {
           full_url: 'https://www.google.com/',
