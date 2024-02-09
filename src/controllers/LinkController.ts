@@ -2,11 +2,6 @@ import { Response, Request } from 'express';
 import linkService from '../services/LinkService';
 
 class LinkController {
-    private linkServicex;
-
-    constructor(service: any ) {
-        this.linkServicex = service;
-    }
 
     async postUser(req: Request, res: Response): Promise<void> {
         let response: Boolean = false;

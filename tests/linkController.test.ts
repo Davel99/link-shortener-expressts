@@ -17,7 +17,7 @@ describe('LinkController', () => {
 
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
-    const linkController = new LinkController(linkService);
+    const linkController = new LinkController();
     await linkController.postUser(mockRequest, mockResponse);
 
     const response : Boolean = true;
@@ -40,7 +40,7 @@ describe('LinkController', () => {
 
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
-    const linkController = new LinkController(linkService);
+    const linkController = new LinkController();
     await linkController.postUser(mockRequest, mockResponse);
 
     const response : Boolean = false;
@@ -62,7 +62,7 @@ describe('LinkController', () => {
 
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
-    const linkController = new LinkController(linkService);
+    const linkController = new LinkController();
     await linkController.postUser(mockRequest, mockResponse);
 
     const response : Boolean = false;
@@ -85,7 +85,7 @@ describe('LinkController', () => {
 
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
-    const linkController = new LinkController(linkService);
+    const linkController = new LinkController();
     await linkController.postUser(mockRequest, mockResponse);
 
     const response : Boolean = false;
@@ -108,7 +108,7 @@ describe('LinkController', () => {
 
     linkService.postUser = jest.fn().mockResolvedValue(true);
 
-    const linkController = new LinkController(linkService);
+    const linkController = new LinkController();
     await linkController.postUser(mockRequest, mockResponse);
 
     const response : Boolean = false;
