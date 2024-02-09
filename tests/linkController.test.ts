@@ -73,4 +73,52 @@ describe('LinkController', () => {
     expect(mockResponse.status).toHaveBeenCalledWith(400);
     expect(mockResponse.json).toHaveBeenCalledWith({response});
   });
+
+  it('Should return false when full_url is empty', async () => {
+    const mockRequest: Request = {
+        body: {
+          full_url: ' ',
+          short_url: 'goo'
+        }
+      } as unknown as Request;
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as unknown as Response;
+
+    const linkService = new LinkService();
+    linkService.postUser = jest.fn().mockResolvedValue(true);
+
+    const linkController = new LinkController(linkService);
+    await linkController.postUser(mockRequest, mockResponse);
+
+    const response : Boolean = false;
+
+    expect(mockResponse.status).toHaveBeenCalledWith(400);
+    expect(mockResponse.json).toHaveBeenCalledWith({response});
+  });
+
+  it('Should return false when short_url is empty', async () => {
+    const mockRequest: Request = {
+        body: {
+          full_url: 'google.com',
+          short_url: ''
+        }
+      } as unknown as Request;
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as unknown as Response;
+
+    const linkService = new LinkService();
+    linkService.postUser = jest.fn().mockResolvedValue(true);
+
+    const linkController = new LinkController(linkService);
+    await linkController.postUser(mockRequest, mockResponse);
+
+    const response : Boolean = false;
+
+    expect(mockResponse.status).toHaveBeenCalledWith(400);
+    expect(mockResponse.json).toHaveBeenCalledWith({response});
+  });
 });
