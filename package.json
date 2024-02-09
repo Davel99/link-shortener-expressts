@@ -5,7 +5,7 @@
   "main": "App.js",
   "scripts": {
     "start": "npx tsc ./src/App.ts && node ./src/App.js",
-    "test": "npx jest"
+    "test": "npx tsc ./src/App.ts && npx jest"
   },
   "keywords": [],
   "author": "",
