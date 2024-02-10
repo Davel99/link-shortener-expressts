@@ -1,6 +1,7 @@
 import { Application, Request, Response, NextFunction } from 'express';
 import db from '../database/dbCreation';
 import linksRouter from './routes/linksRouter';
+import errorHandler from './middleware/ErrorHandler';
 
 const express = require('express');
 
@@ -25,11 +26,8 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use(linksRouter);
 
-// Error handling middleware
-// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-//     console.error(err.stack);
-//     res.status(500).send('Something broke!');
-// });
+//Error handling middleware
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`)
