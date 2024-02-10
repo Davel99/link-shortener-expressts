@@ -17,6 +17,10 @@ class LinkController {
             res.status(200).json({ response });
         }
         else res.status(400).json({ response });
+    }  
+
+    async deleteLink(req: Request, res: Response): Promise<void> {
+        //Logic to delete 
     }
 
 }
