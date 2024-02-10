@@ -7,7 +7,7 @@ const linksRouter = express.Router();
 const linkController = new LinkController();
 
 linksRouter.use(SecureAPIMiddleware);
-linksRouter.post('/api/links', linkController.postUser);
+linksRouter.post('/api/links', linkController.postLink);
 
 
 export default linksRouter;
