@@ -15,10 +15,10 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    linkService.postUser = jest.fn().mockResolvedValue(true);
+    linkService.postLink = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController();
-    await linkController.postUser(mockRequest, mockResponse);
+    await linkController.postLink(mockRequest, mockResponse);
 
     const response : Boolean = true;
 
@@ -38,10 +38,10 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    linkService.postUser = jest.fn().mockResolvedValue(true);
+    linkService.postLink = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController();
-    await linkController.postUser(mockRequest, mockResponse);
+    await linkController.postLink(mockRequest, mockResponse);
 
     const response : Boolean = false;
 
@@ -60,10 +60,10 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    linkService.postUser = jest.fn().mockResolvedValue(true);
+    linkService.postLink = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController();
-    await linkController.postUser(mockRequest, mockResponse);
+    await linkController.postLink(mockRequest, mockResponse);
 
     const response : Boolean = false;
 
@@ -83,10 +83,10 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    linkService.postUser = jest.fn().mockResolvedValue(true);
+    linkService.postLink = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController();
-    await linkController.postUser(mockRequest, mockResponse);
+    await linkController.postLink(mockRequest, mockResponse);
 
     const response : Boolean = false;
 
@@ -106,10 +106,10 @@ describe('LinkController', () => {
       json: jest.fn(),
     } as unknown as Response;
 
-    linkService.postUser = jest.fn().mockResolvedValue(true);
+    linkService.postLink = jest.fn().mockResolvedValue(true);
 
     const linkController = new LinkController();
-    await linkController.postUser(mockRequest, mockResponse);
+    await linkController.postLink(mockRequest, mockResponse);
 
     const response : Boolean = false;
 

@@ -3,7 +3,7 @@ import db from '../../database/dbCreation';
 
 class LinkService {
 
-    async postUser(full_url: String, short_url: String): Promise<Boolean> {
+    async postLink(full_url: String, short_url: String): Promise<Boolean> {
         let response: Boolean = false;
         let date: Date = new Date();
         let query = `INSERT INTO Links (full_url, short_url, created_at)

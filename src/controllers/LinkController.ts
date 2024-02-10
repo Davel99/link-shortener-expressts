@@ -3,7 +3,7 @@ import linkService from '../services/LinkService';
 
 class LinkController {
 
-    async postUser(req: Request, res: Response): Promise<void> {
+    async postLink(req: Request, res: Response): Promise<void> {
         let response: Boolean = false;
         let full_url : string = req.body.full_url;
         let short_url : string = req.body.short_url;
@@ -13,7 +13,7 @@ class LinkController {
         ) {
             full_url = full_url.trim();
             short_url = short_url.trim();
-            response = await linkService.postUser(full_url, short_url);
+            response = await linkService.postLink(full_url, short_url);
             res.status(200).json({ response });
         }
         else res.status(400).json({ response });
