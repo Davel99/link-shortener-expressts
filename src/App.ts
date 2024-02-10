@@ -1,7 +1,6 @@
 import { Application, Request, Response, NextFunction } from 'express';
 import db from '../database/dbCreation';
 import linksRouter from './routes/linksRouter';
-import { apiKey,apiSecret } from './utility/envValues';
 
 const express = require('express');
 
