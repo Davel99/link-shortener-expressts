@@ -1,9 +1,11 @@
-import { Response, Request } from 'express';
+import { Response, Request, NextFunction } from 'express';
 import linkService from '../services/LinkService';
+import ShortenerAppError from '../utility/ShortenerAppError';
+import appMessages from '../utility/appMessages';
 
 class LinkController {
 
-    async postLink(req: Request, res: Response): Promise<void> {
+    async postLink(req: Request, res: Response, next : NextFunction): Promise<void> {
         let response: Boolean = false;
         let full_url : string = req.body.full_url;
         let short_url : string = req.body.short_url;
@@ -16,7 +18,7 @@ class LinkController {
             response = await linkService.postLink(full_url, short_url);
             res.status(200).json({ response });
         }
-        else res.status(400).json({ response });
+        else next(new ShortenerAppError(appMessages.link.controller.invalid_params, 400));
     }  
 
     async deleteLink(req: Request, res: Response): Promise<void> {

@@ -1,4 +1,8 @@
 {
-    "error.message.example": "Example error message"
+    "link": {
+        "controller":{
+            "invalid_params": "Invalid 'full_url' or 'short_url'"
+        }
+    }
 }
   

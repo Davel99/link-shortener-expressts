@@ -1,7 +1,7 @@
 import { Application, Request, Response, NextFunction } from 'express';
 import db from '../database/dbCreation';
 import linksRouter from './routes/linksRouter';
-import errorHandler from './middleware/ErrorHandler';
+import errorHandler from './middleware/errorHandler';
 
 const express = require('express');
 
