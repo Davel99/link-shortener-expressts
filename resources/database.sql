@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS Links (
     id INTEGER PRIMARY KEY,
     full_url TEXT,
     short_url TEXT,
-    created_at TEXT
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS Statistics (
@@ -14,6 +14,6 @@ CREATE TABLE IF NOT EXISTS Statistics (
     device_type TEXT,
     os TEXT,
     browser TEXT,
-    timestamp TEXT,
+    timestamp TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (link_id) REFERENCES Links(id)
 );
