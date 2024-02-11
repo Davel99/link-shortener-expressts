@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 import db from '../../database/dbCreation';
-import LinkDTO from '../dto/LinkDTO';
+import { LinkDTO } from '../dto/LinkDTO';
 import linkRepository from '../repository/linkRepository';
 
 class LinkService {

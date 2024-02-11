@@ -1,5 +1,5 @@
 import db from "../../database/dbCreation";
-import LinkDTO from "../dto/LinkDTO";
+import { LinkDTO } from "../dto/LinkDTO";
 
 class LinkRepository {
     insertQuery: string = "INSERT INTO Links (full_url, short_url) VALUES (?, ?)";

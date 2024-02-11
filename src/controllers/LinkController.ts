@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from 'express';
 import linkService from '../services/LinkService';
 import ShortenerAppError from '../utility/ShortenerAppError';
 import appMessages from '../utility/appMessages';
-import LinkDTO from '../dto/LinkDTO';
+import { LinkDTO } from '../dto/LinkDTO';
 
 class LinkController {
 

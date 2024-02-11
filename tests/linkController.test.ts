@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import LinkController from '../src/controllers/LinkController';
 import linkService from '../src/services/LinkService';
 import appMessages from '../src/utility/appMessages';
-import LinkDTO from '../src/dto/LinkDTO';
+import { LinkDTO } from '../src/dto/LinkDTO';
 
 describe('LinkController', () => {
   it('Should return true when valid data is provided', async () => {
