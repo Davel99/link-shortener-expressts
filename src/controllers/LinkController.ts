@@ -6,22 +6,27 @@ import LinkDTO from '../dto/LinkDTO';
 
 class LinkController {
 
-    async postLink(req: Request, res: Response, next : NextFunction): Promise<void> {
+    async postLink(req: Request, res: Response, next: NextFunction): Promise<void> {
         let response: LinkDTO;
-        let full_url : string = req.body.full_url;
-        let short_url : string = req.body.short_url;
-        if (
-            (full_url != null && short_url != null)
-        && (full_url.trim().length > 0 && short_url.trim().length > 0)
-        ) {
-            full_url = full_url.trim();
-            short_url = short_url.trim();
-            response = await linkService.postLink(full_url, short_url);
-            if(response.id < 0) next(new ShortenerAppError(appMessages.gral.SQL_creation, 500))
-            else res.status(200).json(response);
+        let full_url: string = req.body.full_url;
+        let short_url: string = req.body.short_url;
+        try {
+            if (
+                (full_url != null && short_url != null)
+                && (full_url.trim().length > 0 && short_url.trim().length > 0)
+            ) {
+                full_url = full_url.trim();
+                short_url = short_url.trim();
+                response = await linkService.postLink(full_url, short_url);
+                if (response.id < 0) throw new ShortenerAppError(appMessages.gral.SQL_creation, 500);
+                res.status(200).json(response);
+            }
+            throw new ShortenerAppError(appMessages.controller.invalid_params, 500);
+
+        } catch (error) {
+            next(error);
         }
-        else next(new ShortenerAppError(appMessages.link.controller.invalid_params, 400));
-    }  
+    }
 
     async deleteLink(req: Request, res: Response): Promise<void> {
         //Logic to delete 
