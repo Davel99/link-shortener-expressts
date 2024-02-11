@@ -98,6 +98,9 @@ src/**/*.js
 # Ignore JavaScript files inside database/ directory
 database/**/*.js
 
+# Ignore sqlite database
+.sqlite
+
 
 # Gatsby files
 .cache/
