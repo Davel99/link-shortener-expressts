@@ -1,4 +1,7 @@
 {
+    "gral":{
+        "SQL_creation" : "Error creating object"
+    },
     "link": {
         "controller":{
             "invalid_params": "Invalid 'full_url' or 'short_url'"

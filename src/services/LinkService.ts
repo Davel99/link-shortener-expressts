@@ -1,20 +1,27 @@
 import { Response, Request } from 'express';
 import db from '../../database/dbCreation';
+import LinkDTO from '../dto/LinkDTO';
 
 class LinkService {
 
-    async postLink(full_url: String, short_url: String): Promise<Boolean> {
-        let response: Boolean = false;
+    async postLink(full_url: string, short_url: string): Promise<LinkDTO> {
+        let response: LinkDTO;
         let query = `INSERT INTO Links (full_url, short_url)
         VALUES (?, ?)`
         try{
             response = await new Promise((resolve, reject) => {
-                db.run(query, [full_url, short_url], function (err : Error) {
+                db.run(query, [full_url, short_url],  (err : Error) => {
                     if (err) {
                         console.error(err.message);
                         reject(err);
                     } else {
-                        resolve(true);
+                        const linkDTO : LinkDTO = {
+                            id: 1,
+                            full_url,
+                            short_url,
+                            created_at: ''
+                        }
+                        resolve(linkDTO);
                     }
                 });
             })
@@ -22,7 +29,13 @@ class LinkService {
 
         } catch(error){
             console.error(error);
-            return false;
+            const result : LinkDTO = {
+                id: -1,
+                full_url,
+                short_url,
+                created_at: ''
+            }
+            return result;
         }
     };
 

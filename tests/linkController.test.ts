@@ -2,13 +2,16 @@ import { Request, Response } from 'express';
 import LinkController from '../src/controllers/LinkController';
 import linkService from '../src/services/LinkService';
 import appMessages from '../src/utility/appMessages';
+import LinkDTO from '../src/dto/LinkDTO';
 
 describe('LinkController', () => {
   it('Should return true when valid data is provided', async () => {
+    const full_url : string = 'https://www.google.com/'; 
+    const short_url : string = 'goo';
     const mockRequest: Request = {
       body: {
-        full_url: 'https://www.google.com/',
-        short_url: 'goo'
+        full_url,
+        short_url
       }
     } as unknown as Request;
     const mockResponse = {
@@ -17,15 +20,20 @@ describe('LinkController', () => {
     } as unknown as Response;
     const next = jest.fn();
 
-    linkService.postLink = jest.fn().mockResolvedValue(true);
+    const linkDTO: LinkDTO = {
+      id : 1,
+      full_url,
+      short_url,
+      created_at : ''
+    };
+
+    linkService.postLink = jest.fn().mockResolvedValue(linkDTO);
 
     const linkController = new LinkController();
     await linkController.postLink(mockRequest, mockResponse, next);
 
-    const response: Boolean = true;
-
     expect(mockResponse.status).toHaveBeenCalledWith(200);
-    expect(mockResponse.json).toHaveBeenCalledWith({ response });
+    expect(mockResponse.json).toHaveBeenCalledWith(linkDTO);
   });
 
   it('Should return Error when short_url is mising', async () => {
