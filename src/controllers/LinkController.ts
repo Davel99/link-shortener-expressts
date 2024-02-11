@@ -19,9 +19,8 @@ class LinkController {
                 short_url = short_url.trim();
                 response = await linkService.postLink(full_url, short_url);
                 if (response.id < 0) throw new ShortenerAppError(appMessages.gral.SQL_creation, 500);
-                res.status(200).json(response);
-            }
-            throw new ShortenerAppError(appMessages.controller.invalid_params, 500);
+                else res.status(200).json(response);
+            } else throw new ShortenerAppError(appMessages.controller.invalid_params, 500);
 
         } catch (error) {
             next(error);
