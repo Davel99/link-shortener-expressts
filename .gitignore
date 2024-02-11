@@ -99,7 +99,7 @@ src/**/*.js
 database/**/*.js
 
 # Ignore sqlite database
-.sqlite
+database/**/*.sqlite
 
 
 # Gatsby files
