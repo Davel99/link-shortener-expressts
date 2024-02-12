@@ -13,6 +13,10 @@ class LinkService {
         return response;
     }
 
+    async deleteLink(short_url : string): Promise<boolean> {
+        return true;
+    }
+
 
 
 }
