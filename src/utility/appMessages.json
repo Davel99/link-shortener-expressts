@@ -9,7 +9,7 @@
         },
         "service":{
             "CREATION_ERROR": "Error creating link. It could be due to a duplicated short_url",
-            "DELETE_ERROR": "Error deleting link. Link could not exist"
+            "DELETION_ERROR": "Error deleting link. Link could not exist"
         }
     }
 }
