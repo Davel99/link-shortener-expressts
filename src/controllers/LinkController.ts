@@ -8,7 +8,18 @@ import linksRouter from '../routes/linksRouter';
 class LinkController {
 
     async redirect(req: Request, res : Response, next : NextFunction) : Promise<void> {
+        let url : string = '';
+        let short_url : string = req.params.short_url;
+        try{
+            if(short_url != null && short_url.trim().length > 0){
+                url = await linkService.getUrl(short_url);
+                res.redirect(url);
+            } else throw new ShortenerAppError(appMessages.link.controller.invalid_shortUrl, 400);
 
+        } catch(err){
+            console.error(err);
+            next(err);
+        }
     }
 
     async postLink(req: Request, res: Response, next: NextFunction): Promise<void> {
