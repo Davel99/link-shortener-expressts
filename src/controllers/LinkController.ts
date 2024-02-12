@@ -29,6 +29,15 @@ class LinkController {
 
     async deleteLink(req: Request, res: Response, next: NextFunction): Promise<void> {
         //Logic to delete
+        let { short_url } = req.body;
+        try{
+            if(short_url != null && short_url.trim().length > 0){
+                //Logic to get from service
+            } else throw new ShortenerAppError(appMessages.link.controller.invalid_shortUrl, 400);
+        } catch (error){
+            console.error(error);
+            next(error);
+        }
     }
 
 }

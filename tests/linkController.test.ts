@@ -149,13 +149,6 @@ describe('LinkController.postLink()', () => {
 });
 
 describe('LinkController.deleteLink()', () => {
-  const mockResponse = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn()
-  } as unknown as Response;
-
-  const next = jest.fn();
-
   it('Should return true when valid data is provided', async () => {
     const short_url: string = 'goo';
     const mockRequest: Request = {
@@ -163,6 +156,11 @@ describe('LinkController.deleteLink()', () => {
         short_url
       }
     } as unknown as Request;
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    } as unknown as Response;
+    const next = jest.fn();
 
     const response = true;
     linkService.deleteLink = jest.fn().mockResolvedValue(response);
@@ -180,6 +178,11 @@ describe('LinkController.deleteLink()', () => {
         short_url: ''
       }
     } as unknown as Request;
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    } as unknown as Response;
+    const next = jest.fn();
 
     const linkController = new LinkController();
     linkController.deleteLink(mockRequest, mockResponse, next);
