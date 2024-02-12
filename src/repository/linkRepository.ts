@@ -32,12 +32,7 @@ class LinkRepository {
         let response: LinkDTO =  voidDTO;
         try {
             response = await new Promise((resolve, reject) => {
-                let answer: LinkDTO = {
-                    id: -1,
-                    full_url: '',
-                    short_url: '',
-                    created_at: ''
-                }
+                let answer: LinkDTO = voidDTO;
                 db.get(this.getQuery, [short_url], (err, row: LinkDTO | undefined) => {
                     if (err) {
                         console.error(err);
