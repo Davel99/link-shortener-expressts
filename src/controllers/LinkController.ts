@@ -3,7 +3,6 @@ import linkService from '../services/LinkService';
 import ShortenerAppError from '../utility/ShortenerAppError';
 import appMessages from '../utility/appMessages';
 import { LinkDTO } from '../dto/LinkDTO';
-import linksRouter from '../routes/linksRouter';
 
 class LinkController {
 
