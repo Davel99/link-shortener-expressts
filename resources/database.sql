@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Links (
     id INTEGER PRIMARY KEY,
-    full_url TEXT UNIQUE,
+    full_url TEXT,
     short_url TEXT UNIQUE,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
