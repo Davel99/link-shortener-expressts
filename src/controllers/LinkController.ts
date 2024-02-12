@@ -27,8 +27,8 @@ class LinkController {
         }
     }
 
-    async deleteLink(req: Request, res: Response): Promise<void> {
-        //Logic to delete 
+    async deleteLink(req: Request, res: Response, next: NextFunction): Promise<void> {
+        //Logic to delete
     }
 
 }
