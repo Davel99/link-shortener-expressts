@@ -1,5 +1,5 @@
 import db from "../../database/dbCreation";
-import { LinkDTO } from "../dto/LinkDTO";
+import { LinkDTO, voidDTO } from "../dto/LinkDTO";
 
 class LinkRepository {
     insertQuery: string = "INSERT INTO Links (full_url, short_url) VALUES (?, ?)";
@@ -29,12 +29,7 @@ class LinkRepository {
     }
 
     async get(short_url: string): Promise<LinkDTO> {
-        let response: LinkDTO = {
-            id: -1,
-            full_url: '',
-            short_url: '',
-            created_at: ''
-        }
+        let response: LinkDTO =  voidDTO;
         try {
             response = await new Promise((resolve, reject) => {
                 let answer: LinkDTO = {
