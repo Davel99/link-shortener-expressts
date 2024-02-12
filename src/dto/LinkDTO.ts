@@ -6,7 +6,7 @@ export interface LinkDTO{
 }
 
 
-export const voidDTO : LinkDTO = {
+export const voidLinkDTO : LinkDTO = {
     id: -1,
     full_url: '',
     short_url: '',
