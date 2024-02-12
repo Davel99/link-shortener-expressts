@@ -7,6 +7,10 @@ import linksRouter from '../routes/linksRouter';
 
 class LinkController {
 
+    async redirect(req: Request, res : Response, next : NextFunction) : Promise<void> {
+
+    }
+
     async postLink(req: Request, res: Response, next: NextFunction): Promise<void> {
         let response: LinkDTO;
         let full_url: string = req.body.full_url;

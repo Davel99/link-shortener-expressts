@@ -5,6 +5,10 @@ import appMessages from '../utility/appMessages';
 
 class LinkService {
 
+    async getUrl(short_url : string) : Promise <string> {
+        return '';
+    }
+
     async postLink(full_url: string, short_url: string): Promise<LinkDTO> {
         let response: LinkDTO = voidLinkDTO;
         let answer: boolean = await linkRepository.insert(full_url, short_url);
