@@ -1,5 +1,5 @@
 import db from "../../database/dbCreation";
-import { LinkDTO, voidLinkDTO } from "../dto/LinkDTO";
+import { LinkDTO, voidLinkDTO, createDTOfromObj } from "../dto/LinkDTO";
 
 class LinkRepository {
     insertQuery: string = "INSERT INTO Links (full_url, short_url) VALUES (?, ?)";
@@ -7,8 +7,6 @@ class LinkRepository {
 
     async insert(full_url: string, short_url: string): Promise<boolean> {
         let response: boolean = false;
-        let query = `INSERT INTO Links (full_url, short_url)
-        VALUES (?, ?)`
         try {
             response = await new Promise((resolve, reject) => {
                 db.run(this.insertQuery, [full_url, short_url], (err: Error) => {
@@ -29,7 +27,7 @@ class LinkRepository {
     }
 
     async get(short_url: string): Promise<LinkDTO> {
-        let response: LinkDTO =  voidLinkDTO;
+        let response: LinkDTO = voidLinkDTO;
         try {
             response = await new Promise((resolve, reject) => {
                 let answer: LinkDTO = voidLinkDTO;
@@ -38,12 +36,7 @@ class LinkRepository {
                         console.error(err);
                         reject(err);
                     }
-                    if (row) {
-                        answer.id = row.id;
-                        answer.full_url = row.full_url;
-                        answer.short_url = row.short_url;
-                        answer.created_at = row.created_at;
-                    }
+                    if (row) answer = createDTOfromObj(row);
                     resolve(answer);
                 })
             });

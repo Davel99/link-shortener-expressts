@@ -12,3 +12,13 @@ export const voidLinkDTO : LinkDTO = {
     short_url: '',
     created_at: ''
 }
+
+export const createDTOfromObj = (dto : LinkDTO) => {
+    const newDTO : LinkDTO = {
+        id: dto.id,
+        full_url: dto.full_url,
+        short_url: dto.short_url,
+        created_at: dto.created_at
+    };
+    return newDTO;
+}
