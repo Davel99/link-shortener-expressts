@@ -4,10 +4,10 @@ import linkService from '../src/services/LinkService';
 import appMessages from '../src/utility/appMessages';
 import { LinkDTO } from '../src/dto/LinkDTO';
 
-describe('LinkController', () => {
+describe('LinkController.postLink()', () => {
   it('Should return true when valid data is provided', async () => {
-    const full_url : string = 'https://www.google.com/'; 
-    const short_url : string = 'goo';
+    const full_url: string = 'https://www.google.com/';
+    const short_url: string = 'goo';
     const mockRequest: Request = {
       body: {
         full_url,
@@ -21,10 +21,10 @@ describe('LinkController', () => {
     const next = jest.fn();
 
     const linkDTO: LinkDTO = {
-      id : 1,
+      id: 1,
       full_url,
       short_url,
-      created_at : ''
+      created_at: ''
     };
 
     linkService.postLink = jest.fn().mockResolvedValue(linkDTO);
@@ -144,6 +144,55 @@ describe('LinkController', () => {
     // Assert specific properties of the error
     expect(errorPassedToNext).toBeInstanceOf(Error);
     expect(errorPassedToNext.message).toBe(appMessages.link.controller.invalid_params);
+    expect(errorPassedToNext.statusCode).toBe(400);
+  });
+});
+
+describe('LinkController.deleteLink()', () => {
+  const mockResponse = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn()
+  } as unknown as Response;
+
+  const next = jest.fn();
+
+  it('Should return true when valid data is provided', async () => {
+    const short_url: string = 'goo';
+    const mockRequest: Request = {
+      body: {
+        short_url
+      }
+    } as unknown as Request;
+
+    const response = true;
+    linkService.deleteLink = jest.fn().mockResolvedValue(response);
+
+    const linkController = new LinkController();
+    await linkController.postLink(mockRequest, mockResponse, next);
+
+    expect(mockResponse.status).toHaveBeenCalledWith(200);
+    expect(mockResponse.json).toHaveBeenCalledWith(response);
+  });
+
+  it('Should return Error when short_url is mising', async () => {
+    const mockRequest: Request = {
+      body: {
+        short_url: ''
+      }
+    } as unknown as Request;
+
+    const linkController = new LinkController();
+    linkController.deleteLink(mockRequest, mockResponse, next);
+
+    // Assert that next was called
+    expect(next).toHaveBeenCalled();
+
+    // Get the error passed to next
+    const errorPassedToNext = next.mock.calls[0][0];
+
+    // Assert specific properties of the error
+    expect(errorPassedToNext).toBeInstanceOf(Error);
+    expect(errorPassedToNext.message).toBe(appMessages.link.controller.invalid_shortUrl);
     expect(errorPassedToNext.statusCode).toBe(400);
   });
 });
