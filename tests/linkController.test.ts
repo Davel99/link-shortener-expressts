@@ -152,7 +152,7 @@ describe('LinkController.deleteLink()', () => {
   it('Should return true when valid data is provided', async () => {
     const short_url: string = 'goo';
     const mockRequest: Request = {
-      body: {
+      params: {
         short_url
       }
     } as unknown as Request;
@@ -166,15 +166,15 @@ describe('LinkController.deleteLink()', () => {
     linkService.deleteLink = jest.fn().mockResolvedValue(response);
 
     const linkController = new LinkController();
-    await linkController.postLink(mockRequest, mockResponse, next);
+    await linkController.deleteLink(mockRequest, mockResponse, next);
 
     expect(mockResponse.status).toHaveBeenCalledWith(200);
-    expect(mockResponse.json).toHaveBeenCalledWith(response);
+    expect(mockResponse.json).toHaveBeenCalledWith({response});
   });
 
   it('Should return Error when short_url is mising', async () => {
     const mockRequest: Request = {
-      body: {
+      params: {
         short_url: ''
       }
     } as unknown as Request;

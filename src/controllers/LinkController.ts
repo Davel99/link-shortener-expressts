@@ -29,7 +29,7 @@ class LinkController {
     }
 
     async deleteLink(req: Request, res: Response, next: NextFunction): Promise<void> {
-        let { short_url } = req.params;
+        let short_url : string  = req.params.short_url;
         try{
             if(short_url != null && short_url.trim().length > 0){
                 short_url = short_url.trim();
