@@ -1,6 +1,7 @@
 import { LinkDTO, voidLinkDTO } from '../dto/LinkDTO';
 import linkRepository from '../repository/linkRepository';
 import ShortenerAppError from '../utility/ShortenerAppError';
+import { strValidator } from '../utility/Validators';
 import appMessages from '../utility/appMessages';
 
 class LinkService {
@@ -8,7 +9,7 @@ class LinkService {
     async getUrl(short_url : string) : Promise <string> {
         const dto : LinkDTO = await linkRepository.get(short_url);
         const url : string = dto.full_url;
-        if(url != null && url.length > 0) return url;
+        if( strValidator(url) ) return url;
         else throw new ShortenerAppError(appMessages.link.service.EMPTY_URL, 500);
     }
 
@@ -27,8 +28,6 @@ class LinkService {
         if(!response) throw new ShortenerAppError(appMessages.link.service.DELETION_ERROR,500);
         return true;
     }
-
-
 
 }
 
