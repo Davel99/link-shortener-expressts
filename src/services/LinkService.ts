@@ -14,6 +14,10 @@ class LinkService {
     }
 
     async deleteLink(short_url : string): Promise<boolean> {
+        let exists : LinkDTO = await linkRepository.get(short_url);
+        if(exists.id < 0) throw new ShortenerAppError(appMessages.link.service.DELETION_ERROR,500);
+        let response : boolean = await linkRepository.delete(short_url);
+        if(!response) throw new ShortenerAppError(appMessages.link.service.DELETION_ERROR,500);
         return true;
     }
 
