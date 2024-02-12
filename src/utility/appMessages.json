@@ -4,7 +4,8 @@
     },
     "link": {
         "controller":{
-            "invalid_params": "Invalid 'full_url' or 'short_url'"
+            "invalid_params": "Invalid 'full_url' or 'short_url'",
+            "invalid_shortUrl": "Invalid short_url"
         },
         "service":{
             "CREATION_ERROR": "Error creating link. It could be due to a duplicated short_url"
