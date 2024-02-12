@@ -3,6 +3,7 @@ import linkService from '../services/LinkService';
 import ShortenerAppError from '../utility/ShortenerAppError';
 import appMessages from '../utility/appMessages';
 import { LinkDTO } from '../dto/LinkDTO';
+import linksRouter from '../routes/linksRouter';
 
 class LinkController {
 
@@ -28,11 +29,12 @@ class LinkController {
     }
 
     async deleteLink(req: Request, res: Response, next: NextFunction): Promise<void> {
-        //Logic to delete
-        let { short_url } = req.body;
+        let { short_url } = req.params;
         try{
             if(short_url != null && short_url.trim().length > 0){
-                //Logic to get from service
+                short_url = short_url.trim();
+                let response : boolean = await linkService.deleteLink(short_url);
+                res.status(200).json({ response })
             } else throw new ShortenerAppError(appMessages.link.controller.invalid_shortUrl, 400);
         } catch (error){
             console.error(error);

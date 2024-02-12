@@ -5,9 +5,11 @@ const express = require('express');
 const linksRouter = express.Router();
 
 const linkController = new LinkController();
+const linkAPIPath = '/api/link';
 
 linksRouter.use(SecureAPIMiddleware);
-linksRouter.post('/api/links', linkController.postLink);
+linksRouter.post(linkAPIPath, linkController.postLink);
+linksRouter.delete(linkAPIPath+'/:short_url', linkController.deleteLink);
 
 
 export default linksRouter;
