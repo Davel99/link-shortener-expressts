@@ -6,7 +6,10 @@ import appMessages from '../utility/appMessages';
 class LinkService {
 
     async getUrl(short_url : string) : Promise <string> {
-        return '';
+        const dto : LinkDTO = await linkRepository.get(short_url);
+        const url : string = dto.full_url;
+        if(url != null && url.length > 0) return url;
+        else throw new ShortenerAppError(appMessages.link.service.EMPTY_URL, 500);
     }
 
     async postLink(full_url: string, short_url: string): Promise<LinkDTO> {
