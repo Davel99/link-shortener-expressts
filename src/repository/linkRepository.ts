@@ -35,7 +35,7 @@ class LinkRepository {
                 db.get(this.getQuery, [short_url], (err, row: LinkDTO | undefined) => {
                     if (err) {
                         console.error(err);
-                        reject(err);
+                        reject(voidLinkDTO);
                     }
                     if (row) answer = createDTOfromObj(row);
                     resolve(answer);
