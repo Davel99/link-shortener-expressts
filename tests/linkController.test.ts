@@ -227,3 +227,55 @@ describe('LinkController.deleteLink()', () => {
     expect(errorPassedToNext.statusCode).toBe(400);
   });
 });
+
+describe('LinkController.redirect()', () => {
+  it('Should return REDIRECTION when valid data is provided', async () => {
+    const short_url: string = 'goo';
+    const mockRequest: Request = {
+      params: {
+        short_url
+      }
+    } as unknown as Request;
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+      redirect: jest.fn()
+    } as unknown as Response;
+    const next = jest.fn();
+
+    const response = "https://google.com";
+    linkService.getUrl = jest.fn().mockResolvedValue(response);
+
+    const linkController = new LinkController();
+    await linkController.redirect(mockRequest, mockResponse, next);
+
+    expect(mockResponse.redirect).toHaveBeenCalledWith(response);
+  });
+
+  // it('Should return ERROR when MISSING short_url', async () => {
+  //   const mockRequest: Request = {
+  //     params: {
+  //       short_url: ''
+  //     }
+  //   } as unknown as Request;
+  //   const mockResponse = {
+  //     status: jest.fn().mockReturnThis(),
+  //     json: jest.fn()
+  //   } as unknown as Response;
+  //   const next = jest.fn();
+
+  //   const linkController = new LinkController();
+  //   linkController.deleteLink(mockRequest, mockResponse, next);
+
+  //   // Assert that next was called
+  //   expect(next).toHaveBeenCalled();
+
+  //   // Get the error passed to next
+  //   const errorPassedToNext = next.mock.calls[0][0];
+
+  //   // Assert specific properties of the error
+  //   expect(errorPassedToNext).toBeInstanceOf(Error);
+  //   expect(errorPassedToNext.message).toBe(appMessages.link.controller.invalid_shortUrl);
+  //   expect(errorPassedToNext.statusCode).toBe(400);
+  // });
+});
