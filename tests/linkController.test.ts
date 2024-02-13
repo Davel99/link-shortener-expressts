@@ -5,7 +5,7 @@ import appMessages from '../src/utility/appMessages';
 import { LinkDTO } from '../src/dto/LinkDTO';
 
 describe('LinkController.postLink()', () => {
-  it('Should return true when valid data is provided', async () => {
+  it('Should return TRUE when valid data is provided', async () => {
     const full_url: string = 'https://www.google.com/';
     const short_url: string = 'goo';
     const mockRequest: Request = {
@@ -36,7 +36,7 @@ describe('LinkController.postLink()', () => {
     expect(mockResponse.json).toHaveBeenCalledWith(linkDTO);
   });
 
-  it('Should return Error when short_url is mising', async () => {
+  it('Should return ERROR when MISSING short_url', async () => {
     const mockRequest: Request = {
       body: {
         full_url: 'https://www.google.com/',
@@ -64,7 +64,7 @@ describe('LinkController.postLink()', () => {
     expect(errorPassedToNext.statusCode).toBe(400);
   });
 
-  it('Should return Error when full_url is missing', async () => {
+  it('Should return ERROR when MISSING full_url', async () => {
     const mockRequest: Request = {
       body: {
         short_url: 'goo'
@@ -91,7 +91,7 @@ describe('LinkController.postLink()', () => {
     expect(errorPassedToNext.statusCode).toBe(400);
   });
 
-  it('Should return Error when full_url is empty', async () => {
+  it('Should return ERROR when EMPTY full_url', async () => {
     const mockRequest: Request = {
       body: {
         full_url: ' ',
@@ -119,7 +119,7 @@ describe('LinkController.postLink()', () => {
     expect(errorPassedToNext.statusCode).toBe(400);
   });
 
-  it('Should return Error when short_url is empty', async () => {
+  it('Should return ERROR when EMPTY short_url', async () => {
     const mockRequest: Request = {
       body: {
         full_url: 'google.com',
@@ -147,7 +147,7 @@ describe('LinkController.postLink()', () => {
     expect(errorPassedToNext.statusCode).toBe(400);
   });
 
-  it('Should return Error when full_url is invalid', async () => {
+  it('Should return ERROR when INVALID full_url', async () => {
     const mockRequest: Request = {
       body: {
         full_url : 'https://invalidddd',
@@ -177,7 +177,7 @@ describe('LinkController.postLink()', () => {
 });
 
 describe('LinkController.deleteLink()', () => {
-  it('Should return true when valid data is provided', async () => {
+  it('Should return TRUE when valid data is provided', async () => {
     const short_url: string = 'goo';
     const mockRequest: Request = {
       params: {
@@ -200,7 +200,7 @@ describe('LinkController.deleteLink()', () => {
     expect(mockResponse.json).toHaveBeenCalledWith({response});
   });
 
-  it('Should return Error when short_url is mising', async () => {
+  it('Should return ERROR when MISSING short_url', async () => {
     const mockRequest: Request = {
       params: {
         short_url: ''
