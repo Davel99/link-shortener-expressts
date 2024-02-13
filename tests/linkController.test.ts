@@ -150,7 +150,7 @@ describe('LinkController.postLink()', () => {
   it('Should return ERROR when INVALID full_url', async () => {
     const mockRequest: Request = {
       body: {
-        full_url : 'https://invalidddd',
+        full_url: 'https://invalidddd',
         short_url: 'goo'
       }
     } as unknown as Request;
@@ -197,7 +197,7 @@ describe('LinkController.deleteLink()', () => {
     await linkController.deleteLink(mockRequest, mockResponse, next);
 
     expect(mockResponse.status).toHaveBeenCalledWith(200);
-    expect(mockResponse.json).toHaveBeenCalledWith({response});
+    expect(mockResponse.json).toHaveBeenCalledWith({ response });
   });
 
   it('Should return ERROR when MISSING short_url', async () => {
@@ -252,30 +252,33 @@ describe('LinkController.redirect()', () => {
     expect(mockResponse.redirect).toHaveBeenCalledWith(response);
   });
 
-  // it('Should return ERROR when MISSING short_url', async () => {
-  //   const mockRequest: Request = {
-  //     params: {
-  //       short_url: ''
-  //     }
-  //   } as unknown as Request;
-  //   const mockResponse = {
-  //     status: jest.fn().mockReturnThis(),
-  //     json: jest.fn()
-  //   } as unknown as Response;
-  //   const next = jest.fn();
+  it('Should return ERROR when INVALID full_url', async () => {
+    const mockRequest: Request = {
+      params: {
+        short_url: 'goo'
+      }
+    } as unknown as Request;
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    } as unknown as Response;
+    const next = jest.fn();
 
-  //   const linkController = new LinkController();
-  //   linkController.deleteLink(mockRequest, mockResponse, next);
+    const invalidUrl = "httx://goo.com";
+    linkService.getUrl = jest.fn().mockResolvedValue(invalidUrl);
 
-  //   // Assert that next was called
-  //   expect(next).toHaveBeenCalled();
+    const linkController = new LinkController();
+    await linkController.redirect(mockRequest, mockResponse, next);
 
-  //   // Get the error passed to next
-  //   const errorPassedToNext = next.mock.calls[0][0];
+    // Assert that next was called
+    expect(next).toHaveBeenCalled();
 
-  //   // Assert specific properties of the error
-  //   expect(errorPassedToNext).toBeInstanceOf(Error);
-  //   expect(errorPassedToNext.message).toBe(appMessages.link.controller.invalid_shortUrl);
-  //   expect(errorPassedToNext.statusCode).toBe(400);
-  // });
+    // Get the error passed to next
+    const errorPassedToNext = next.mock.calls[0][0];
+
+    // Assert specific properties of the error
+    expect(errorPassedToNext).toBeInstanceOf(Error);
+    expect(errorPassedToNext.message).toBe(appMessages.link.controller.invalid_fullUrl);
+    expect(errorPassedToNext.statusCode).toBe(400);
+  });
 });
