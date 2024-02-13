@@ -146,6 +146,34 @@ describe('LinkController.postLink()', () => {
     expect(errorPassedToNext.message).toBe(appMessages.link.controller.invalid_params);
     expect(errorPassedToNext.statusCode).toBe(400);
   });
+
+  it('Should return Error when full_url is invalid', async () => {
+    const mockRequest: Request = {
+      body: {
+        full_url : 'https://invalidddd',
+        short_url: 'goo'
+      }
+    } as unknown as Request;
+    const mockResponse = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as unknown as Response;
+    const next = jest.fn();
+
+    const linkController = new LinkController();
+    linkController.postLink(mockRequest, mockResponse, next);
+
+    // Assert that next was called
+    expect(next).toHaveBeenCalled();
+
+    // Get the error passed to next
+    const errorPassedToNext = next.mock.calls[0][0];
+
+    // Assert specific properties of the error
+    expect(errorPassedToNext).toBeInstanceOf(Error);
+    expect(errorPassedToNext.message).toBe(appMessages.link.controller.invalid_fullUrl);
+    expect(errorPassedToNext.statusCode).toBe(400);
+  });
 });
 
 describe('LinkController.deleteLink()', () => {
