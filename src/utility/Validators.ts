@@ -6,3 +6,7 @@ export const urlValidator = ( url : string ) : boolean => {
     const urlRegex = /^http(s)*:\/\/(\w+\.)+\w+(\/\w+)*(\/)*$/;
     return urlRegex.test(url);
 }
+
+export const arrayValidator = <T>(array: T[] | undefined | null): boolean => {
+    return Array.isArray(array) && array.length > 0;
+};
