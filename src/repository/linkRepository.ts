@@ -4,7 +4,7 @@ import { LinkDTO, voidLinkDTO, createDTOfromObj } from "../dto/LinkDTO";
 class LinkRepository {
     insertQuery: string = "INSERT INTO Links (full_url, short_url) VALUES (?, ?)";
     getQuery: string = "SELECT * FROM Links WHERE short_url = ?";
-    deleteQuery : string = "DELETE FROM Links WHERE short_url = ?"
+    deleteQuery: string = "DELETE FROM Links WHERE short_url = ?"
 
     async insert(full_url: string, short_url: string): Promise<boolean> {
         let response: boolean = false;
@@ -24,6 +24,33 @@ class LinkRepository {
         } catch (error) {
             console.error(error);
             return false;
+        }
+    }
+
+    async getAll(): Promise<LinkDTO[]> {
+        let response: LinkDTO[] = [voidLinkDTO];
+        try {
+            response = await new Promise<LinkDTO[]>((resolve, reject) => {
+                db.all('SELECT * FROM Links', (err, rows: LinkDTO[]) => {
+                    if (err) {
+                        console.error(err);
+                        reject([]);
+                    } else {
+                        let data: LinkDTO[] = [voidLinkDTO];
+                        if (rows) {
+                            rows.forEach((row, index) => {
+                                data[index] = createDTOfromObj(row);
+                            });
+                        }
+                        resolve(data);
+                    }
+                });
+            });
+            return response;
+
+        } catch (error) {
+            console.error(error);
+            return response;
         }
     }
 
@@ -50,11 +77,11 @@ class LinkRepository {
 
     }
 
-    async delete(short_url : string ) : Promise<boolean> {
-        let response : boolean = false;
+    async delete(short_url: string): Promise<boolean> {
+        let response: boolean = false;
         response = await new Promise((resolve, reject) => {
-            db.run(this.deleteQuery, [ short_url ], err => {
-                if(err){
+            db.run(this.deleteQuery, [short_url], err => {
+                if (err) {
                     console.error(err);
                     reject(false);
                 } else {
