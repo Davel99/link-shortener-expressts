@@ -6,10 +6,10 @@ import appMessages from '../utility/appMessages';
 
 class LinkService {
 
-    async getUrl(short_url : string) : Promise <string> {
-        const dto : LinkDTO = await linkRepository.get(short_url);
-        const url : string = dto.full_url;
-        if( strValidator(url) ) return url;
+    async getUrl(short_url: string): Promise<string> {
+        const dto: LinkDTO = await linkRepository.get(short_url);
+        const url: string = dto.full_url;
+        if (strValidator(url)) return url;
         else throw new ShortenerAppError(appMessages.link.service.EMPTY_URL, 500);
     }
 
@@ -21,11 +21,16 @@ class LinkService {
         return response;
     }
 
-    async deleteLink(short_url : string): Promise<boolean> {
-        let exists : LinkDTO = await linkRepository.get(short_url);
-        if(exists.id < 0) throw new ShortenerAppError(appMessages.link.service.DELETION_ERROR,500);
-        let response : boolean = await linkRepository.delete(short_url);
-        if(!response) throw new ShortenerAppError(appMessages.link.service.DELETION_ERROR,500);
+    async getAll(): Promise<LinkDTO[]> {
+        let response: LinkDTO[] = await linkRepository.getAll();
+        return response;
+    }
+
+    async deleteLink(short_url: string): Promise<boolean> {
+        let exists: LinkDTO = await linkRepository.get(short_url);
+        if (exists.id < 0) throw new ShortenerAppError(appMessages.link.service.DELETION_ERROR, 500);
+        let response: boolean = await linkRepository.delete(short_url);
+        if (!response) throw new ShortenerAppError(appMessages.link.service.DELETION_ERROR, 500);
         return true;
     }
 

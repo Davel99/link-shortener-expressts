@@ -1,5 +1,4 @@
 import { Application, Request, Response, NextFunction } from 'express';
-import db from '../database/dbCreation';
 import linksRouter from './routes/linksRouter';
 import errorHandler from './middleware/errorHandler';
 
@@ -13,16 +12,6 @@ const PORT = process.env.PORT || 5500;
 app.use(express.json());
 
 // Sample route
-app.get('/', (req: Request, res: Response) => {    
-
-    db.all('SELECT * FROM Links', (err, rows) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
 
 app.use(linksRouter);
 

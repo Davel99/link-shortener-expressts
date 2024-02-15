@@ -23,6 +23,11 @@ class LinkController {
         }
     }
 
+    async getAll(req: Request, res: Response) : Promise<void> {
+        let response : LinkDTO[] = await linkService.getAll();
+        res.json(response);
+    }
+
     async postLink(req: Request, res: Response, next: NextFunction): Promise<void> {
         let response: LinkDTO;
         let full_url: string = req.body.full_url;
