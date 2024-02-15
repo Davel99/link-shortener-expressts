@@ -28,7 +28,7 @@ class LinkRepository {
     }
 
     async getAll(): Promise<LinkDTO[]> {
-        let response: LinkDTO[] = [voidLinkDTO];
+        let response: LinkDTO[] = [];
         try {
             response = await new Promise<LinkDTO[]>((resolve, reject) => {
                 db.all('SELECT * FROM Links', (err, rows: LinkDTO[]) => {
@@ -36,7 +36,7 @@ class LinkRepository {
                         console.error(err);
                         reject([]);
                     } else {
-                        let data: LinkDTO[] = [voidLinkDTO];
+                        let data: LinkDTO[] = [];
                         if (rows) {
                             rows.forEach((row, index) => {
                                 data[index] = createDTOfromObj(row);
