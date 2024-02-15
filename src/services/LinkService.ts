@@ -1,7 +1,7 @@
 import { LinkDTO, voidLinkDTO } from '../dto/LinkDTO';
 import linkRepository from '../repository/linkRepository';
 import ShortenerAppError from '../utility/ShortenerAppError';
-import { strValidator } from '../utility/Validators';
+import { arrayValidator, strValidator } from '../utility/Validators';
 import appMessages from '../utility/appMessages';
 
 class LinkService {
@@ -23,7 +23,8 @@ class LinkService {
 
     async getAll(): Promise<LinkDTO[]> {
         let response: LinkDTO[] = await linkRepository.getAll();
-        return response;
+        if(!arrayValidator(response)) throw new ShortenerAppError(appMessages.link.service.EMPTY_RESPONSE, 500);
+        else return response;
     }
 
     async deleteLink(short_url: string): Promise<boolean> {

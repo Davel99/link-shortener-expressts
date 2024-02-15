@@ -23,9 +23,14 @@ class LinkController {
         }
     }
 
-    async getAll(req: Request, res: Response) : Promise<void> {
-        let response : LinkDTO[] = await linkService.getAll();
-        res.json(response);
+    async getAll(req: Request, res: Response, next : NextFunction): Promise<void> {
+        try {
+            let response: LinkDTO[] = await linkService.getAll();
+            res.json(response);
+        } catch (error) {
+            next(error);
+        }
+
     }
 
     async postLink(req: Request, res: Response, next: NextFunction): Promise<void> {
