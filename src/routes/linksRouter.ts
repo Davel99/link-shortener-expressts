@@ -9,6 +9,7 @@ const linkAPIPath = '/api/link';
 
 linksRouter.get('/:short_url', linkController.redirect);
 linksRouter.use(SecureAPIMiddleware);
+linksRouter.get(linkAPIPath, linkController.getAll)
 linksRouter.post(linkAPIPath, linkController.postLink);
 linksRouter.delete(linkAPIPath+'/:short_url', linkController.deleteLink);
 
