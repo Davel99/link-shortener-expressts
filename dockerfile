@@ -1,6 +1,9 @@
 # Use an official Node runtime as the base image
 FROM node:14-alpine
 
+# Install SQLite
+RUN apk add --no-cache sqlite
+
 # Set the working directory in the container
 WORKDIR /app
 
