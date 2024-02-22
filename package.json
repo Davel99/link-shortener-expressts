@@ -4,8 +4,9 @@
   "description": "",
   "main": "App.js",
   "scripts": {
-    "start": "npx tsc ./src/App.ts && node ./src/App.js",
-    "test": "npx tsc ./src/App.ts && npx jest"
+    "build": "npx tsc",
+    "start": "npm run build && node ./dist/src/App.js",
+    "test": "npx tsc && npx jest"
   },
   "keywords": [],
   "author": "",
