@@ -1,5 +1,5 @@
 # Use an official Node runtime as the base image
-FROM node:14-alpine
+FROM node:18-alpine
 
 # Install SQLite
 RUN apk add --no-cache sqlite
