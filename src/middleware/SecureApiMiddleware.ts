@@ -7,7 +7,6 @@ export const SecureAPIMiddleware = (
     next: NextFunction
 ) => {
     const { api_key, api_secret } = req.headers;
-    console.log(`KEY is ${api_key} and SECRET is ${api_secret}`)
 
     if (!api_key || !api_secret) {
         return res.status(500).json({ error: 'API key or secret not configured' });
