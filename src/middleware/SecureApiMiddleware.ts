@@ -9,7 +9,7 @@ export const SecureAPIMiddleware = (
     const { api_key, api_secret } = req.headers;
 
     if (!api_key || !api_secret) {
-        return res.status(500).json({ error: 'API key or secret not configured' });
+        return res.status(500).json({ error: 'Unauthorized' });
     }
 
     if (
