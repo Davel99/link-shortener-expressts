@@ -1,6 +1,6 @@
 # Link Shortener
 ### An ExpressJS + Typescript app
-Link shortener app using ExpressJS + Typescript + SQLite + API KEY and SECRET to use the API without User account. Its purpose is to be the easiest app to run for someone who wants a quick way to create shorter links.
+Link shortener app using ExpressJS + Typescript + SQLite. It works wthouth having to create user accounts. Security is handled by the owner with API KEY and SECRET. Its purpose is to be the easiest app to run for someone who wants a quick way to create shorter links.
 
 # How to run it?
 ## - - Working directly with NodeJS
