@@ -83,6 +83,15 @@ In case of a successful request, application is going to return the resulting Li
 }
 ```
 ## Deleting a route
+Send a DELETE request to `<domain>/api/link/{short_url}`. Make sure you have set up the appropriate values for Key and Secret in headers.
+
+## Getting all routes
+Send a GET request to `<domain>/api/link` to see the list of all routes in your app. Make sure you have set up the appropriate values for Key and Secret in headers.
+
+## Getting redirected
+Send this link to the users: `<domain>/{short_url}`. Replace `short_url` and app will redirect every request to the `full_url` related to that short_url.
+
+That's all!
 
 
 
