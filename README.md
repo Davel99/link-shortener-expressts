@@ -43,5 +43,46 @@ API_SECRET=test
 That's all!
 
 # How to use it
-Note: continue writing this...
+Keep handy the IP or URL of your application. For example: `http://localhost:3000`, whicho is going to be `<domain>` in this tutorial. You will also use an application like POSTMAN to send HTTP Requests to your app.
+
+## Uploading a route
+#### 1. Prepare POST
+Send a POST request to `<domain>/api/link`
+#### 2. Prepare Headers
+Set next headers with their corresponding values:
+`api_key` and `api_secret`
+#### 3. Prepare body
+Send a JSON body with `full_url` and `short_url`. Example:
+```
+{
+    "full_url" : "https://letras.davelgomoz.com/",
+    "short_url" : "letras-app"
+}
+```
+In case of a missing/wrong Key/Secret:
+```
+{
+    "error": "Unauthorized"
+}
+```
+It has validations for the full_url, making sure you are creating a valid url. Let's say you are creating a `wrongurl/path`. App response will be:
+```
+{
+    "status": "error",
+    "statusCode": 400,
+    "message": "Invalid full_url. This parameter must be like 'http(s)://(subdomain.)domain.com(/path/to/something)'. Please, send a valid URL"
+}
+```
+In case of a successful request, application is going to return the resulting LinkDTO
+```
+{
+    "id": 1,
+    "full_url": "https://letras.davelgomoz.com/",
+    "short_url": "letras-app",
+    "created_at": "2024-03-08 04:14:40"
+}
+```
+## Deleting a route
+
+
 
